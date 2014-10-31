@@ -1,0 +1,14 @@
+To run the tests you'll need access to an Openstack Swift server.
+
+Set these environment variables before running the tests
+
+  export OS_API_USER='user'
+  export OS_API_KEY='key'
+  export OS_AUTH_URL='https://url.of.auth.server/v1.0'
+
+Those tests were based on python-ftp-cloudfs tests, MIT licensed.
+
+Please check the original project at:
+
+https://github.com/chmouel/ftp-cloudfs
+
