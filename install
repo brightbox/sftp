@@ -1,0 +1,36 @@
+#!/bin/sh
+#
+# Given a pristine system this will install the code
+#
+
+
+
+#
+#  Get our starting directory.
+#
+dir=`pwd`
+
+rm -rf /usr/local/lib/python2.7/dis-packages/*swift*     || true
+rm -rf /usr/local/lib/python2.7/dis-packages/*sftp*      || true
+rm -rf /usr/local/lib/python2.7/dis-packages/*cloudfs*   || true
+
+
+#
+#  Install the swift-client.
+#
+cd python-swiftclient && python setup.py install
+
+#
+#  Reset the PWD and install the cloudfs library.
+#
+cd "$dir"
+pip install ftp-cloudfs/
+
+#
+#  Reset the PWD and install the sftp library.
+#
+cd "$dir"
+pip install sftpcloudfs
+
+
+
