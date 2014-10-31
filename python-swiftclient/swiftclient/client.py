@@ -18,6 +18,7 @@ OpenStack Swift client library used internally
 """
 
 import socket
+import re
 import sys
 import logging
 import warnings
@@ -189,6 +190,21 @@ def http_connection(url, proxy=None, ssl_compression=True):
 
 
 def get_auth_1_0(url, user, key, snet):
+
+    # replacement for the storage URL
+    identifier = None
+
+    # look for the account suffix, if found update the username
+    # to remove it, and store the identifier we'll replace the
+    # storage URL with.
+    result = re.search('^([^:]+):?(acc-.*)?$', user )
+
+    if ( result and result.group(2) ):
+        logger.info("Remapping from user %s" % user)
+        identifier = result.group(2)
+        user = result.group(1)
+        logger.info("Remapped user is now %s" % user)
+
     parsed, conn = http_connection(url)
     method = 'GET'
     conn.request(method, parsed.path, '',
@@ -197,6 +213,12 @@ def get_auth_1_0(url, user, key, snet):
     body = resp.read()
     http_log((url, method,), {}, resp, body)
     url = resp.getheader('x-storage-url')
+
+    # remap the URL if we should
+    if ( identifier is not None ):
+        logger.info("Remapping storage URL from %s" % url)
+        url = re.sub( "([^/]+)$", identifier , url)
+        logger.info("Remapping storage URL is now %s" % url)
 
     # There is a side-effect on current Rackspace 1.0 server where a
     # bad URL would get you that document page and a 200. We error out
