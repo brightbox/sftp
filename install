@@ -30,7 +30,7 @@ pip install ftp-cloudfs/
 #  Reset the PWD and install the sftp library.
 #
 cd "$dir"
-pip install sftpcloudfs
+pip install sftpcloudfs/
 
 
 
