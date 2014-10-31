@@ -27,6 +27,7 @@ THE SOFTWARE.
 import logging
 
 import os
+import re
 import errno
 import shlex
 from time import time
@@ -339,6 +340,11 @@ class ObjectStorageSFTPServer(ForkingTCPServer, paramiko.ServerInterface):
         try:
             if not password:
                 raise EnvironmentError("no password provided")
+
+            result = re.search( '(@|^acc-)', username )
+            if ( result is None ):
+                raise EnvironmentError("bogus username")
+
             self.fs.authenticate(username, password)
         except EnvironmentError, e:
             self.log.warning("%s: Failed to authenticate: %s" % (self.client_address, e))
