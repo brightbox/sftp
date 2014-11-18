@@ -38,11 +38,11 @@ pip install sftpcloudfs/
 #
 #  Create two wrapper-scripts
 #
-cat > /usr/local/bin/swift-start <<EOF
+cat > /usr/local/bin/sftp-start <<EOF
 #!/bin/sh
 /usr/sbin/service sftp start
 EOF
-cat > /usr/local/bin/swift-stop <<EOF
+cat > /usr/local/bin/sftp-stop <<EOF
 #!/bin/sh
 /usr/sbin/service sftp stop
 EOF
@@ -50,4 +50,4 @@ EOF
 #
 # Ensure they're executable
 #
-chmod 755 /usr/local/bin/swift-start /usr/local/bin/swift-stop
+chmod 755 /usr/local/bin/sftp-start /usr/local/bin/sftp-stop
