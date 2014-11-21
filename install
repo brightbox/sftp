@@ -45,6 +45,7 @@ EOF
 cat > /usr/local/bin/sftp-stop <<EOF
 #!/bin/sh
 /usr/sbin/service sftp stop
+/usr/bin/killall -9 sftpcloudfs 2>/dev/null >/dev/null
 EOF
 
 #
