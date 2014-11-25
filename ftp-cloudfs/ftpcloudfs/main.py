@@ -94,7 +94,7 @@ class Main(object):
                                   'uid': None,
                                   'gid': None,
                                   'masquerade-firewall': None,
-                                  'split-large-files': '0',
+                                  'split-large-files': '1073741824',
                                   'hide-part-dir': 'no',
                                   # keystone auth 2.0 support
                                   'keystone-auth': False,
@@ -244,7 +244,7 @@ class Main(object):
 
         try:
             # store bytes
-            ObjectStorageFD.split_size = int(self.config.get('ftpcloudfs', 'split-large-files'))*10**6
+            ObjectStorageFD.split_size = int(self.config.get('ftpcloudfs', 'split-large-files'))
         except ValueError, errmsg:
             sys.exit('Split large files error: %s' % errmsg)
 

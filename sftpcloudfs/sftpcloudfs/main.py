@@ -121,8 +121,8 @@ class Main(object):
                                   'pid-file': None,
                                   'uid': None,
                                   'gid': None,
-                                  'split-large-files': "0",
-                                  'hide-part-dir': "no",
+                                  'split-large-files': "1073741824",
+                                  'hide-part-dir': "yes",
                                   # keystone auth 2.0 support
                                   'keystone-auth': False,
                                   'keystone-region-name': None,
